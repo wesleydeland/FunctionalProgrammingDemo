@@ -1,0 +1,166 @@
+# .NET
+# Build results
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+bin/
+obj/
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Rider
+.idea/
+*.sln.iml
+
+# ASP.NET Scaffolding
+ScaffoldingReadMe.txt
+
+# DotCover
+*.dotCover
+
+# NCrunch
+*.ncrunch*
+.*crunch*.local.xml
+
+# MSTest test Results
+[Tt]est[Rr]esult*/
+[Bb]uild[Ll]og.*
+
+# NUnit
+*.VisualState.xml
+TestResult.xml
+nunit-*.xml
+
+# Build Results of an ATL Project
+[Dd]ebugPS/
+[Rr]eleasePS/
+
+# .NET Core
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# StyleCop
+StyleCopReport.xml
+
+# Files built by Visual Studio
+*_i.c
+*_p.c
+*_h.h
+*.ilk
+*.meta
+*.obj
+*.iobj
+*.pch
+*.pdb
+*.ipdb
+*.pgc
+*.pgd
+*.rsp
+*.sbr
+*.tlb
+*.tli
+*.tlh
+*.tmp
+*.tmp_proj
+*.log
+*.vspscc
+*_i.asm
+*_p.asm
+*.cachefile
+*.dbmdl
+*.bak
+*.backup
+*.BLOB
+*.db
+*.sdf
+*.sqlite
+*.mdf
+*.ldf
+*.ndf
+*.v12.suo
+*.v11.suo
+*.vssscc
+*.vsmdi
+*.psess
+*.vsp
+*.vsix
+*.docstates
+*.userprefs
+
+# Others
+*.log
+*.tlog
+*.vspscc
+*.vssscc
+*.cache
+*.suo
+*.user
+*.sdf
+*.cachefile
+*.dbmdl
+*.bak
+*.backup
+*.BLOB
+*.db
+*.sdf
+*.sqlite
+*.mdf
+*.ldf
+*.ndf
+*.v12.suo
+*.v11.suo
+*.vsmdi
+*.psess
+*.vsp
+*.vsix
+*.docstates
+*.userprefs
+
+# Local History for Visual Studio
+.localhistory/
+
+# Windows image file caches
+Thumbs.db
+ ehthumbs.db
+
+# Folder config file
+Desktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# VS Code
+.vscode/
+
+# Windows Installer files
+*.cab
+*.msi
+*.msm
+*.msp
+
+# JetBrains Rider
+.idea/
+*.sln.iml
+
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Mono Auto Generated Files
+mono_crash.*
+
+# Mac
+.DS_Store
+
+# Azure Pipelines
+.azure-pipelines/
