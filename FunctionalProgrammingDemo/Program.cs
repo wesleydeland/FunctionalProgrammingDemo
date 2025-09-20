@@ -1,8 +1,5 @@
 ﻿// Functional Programming Demo in .NET
-using System;
-using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Linq;
 
 public record Person(string Name, int Age);
 
