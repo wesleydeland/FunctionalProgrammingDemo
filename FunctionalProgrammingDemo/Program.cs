@@ -3,6 +3,43 @@ using System.Collections.Immutable;
 
 public record Person(string Name, int Age);
 
+// Shape hierarchy for pattern matching examples
+public abstract record Shape;
+public record Circle(double Radius) : Shape;
+public record Rectangle(double Width, double Height) : Shape;
+public record Triangle(double Base, double Height) : Shape;
+
+public static class PatternMatchingExamples
+{
+    // Switch expression with pattern matching
+    public static double CalculateArea(Shape shape) => shape switch
+    {
+        Circle c => Math.PI * c.Radius * c.Radius,
+        Rectangle r => r.Width * r.Height,
+        Triangle t => 0.5 * t.Base * t.Height,
+        null => 0,
+        _ => throw new ArgumentException("Unknown shape type", nameof(shape))
+    };
+
+    // Property pattern matching
+    public static string ClassifyPerson(Person person) => person switch
+    {
+        { Age: < 13 } => "Child",
+        { Age: < 20 } => "Teenager",
+        { Age: < 65 } => "Adult",
+        _ => "Senior"
+    };
+
+    // Tuple pattern matching
+    public static string CompareNumbers(int a, int b) => (a, b) switch
+    {
+        (0, 0) => "Both zero",
+        (var x, var y) when x > y => "First is larger",
+        (var x, var y) when x < y => "Second is larger",
+        _ => "Both are equal"
+    };
+}
+
 public static class FunctionalExamples
 {
     // 1. Pure Function Example
@@ -62,7 +99,46 @@ public class Program
         {
             var result = PureFunctionExamples.CallExternalService();
             Console.WriteLine($"CallExternalService Result: Success = {result.Success}, Message = '{result.Message}'");
+        }
 
+        // Pattern Matching Examples
+        Console.WriteLine("\nPattern Matching Examples:");
+        
+        // Shape pattern matching
+        Shape[] shapes = 
+        {
+            new Circle(5),
+            new Rectangle(4, 6),
+            new Triangle(3, 4)
+        };
+
+        foreach (var shape in shapes)
+        {
+            var area = PatternMatchingExamples.CalculateArea(shape);
+            Console.WriteLine($"Area of {shape.GetType().Name}: {area:F2}");
+        }
+
+        // Person classification pattern matching
+        var people = new[]
+        {
+            new Person("Tommy", 10),
+            new Person("Jane", 16),
+            new Person("Bob", 35),
+            new Person("Martha", 70)
+        };
+
+        foreach (var person in people)
+        {
+            var classification = PatternMatchingExamples.ClassifyPerson(person);
+            Console.WriteLine($"{person.Name} is a {classification}");
+        }
+
+        // Number comparison pattern matching
+        var numberPairs = new[] { (0, 0), (5, 3), (2, 7), (4, 4) };
+        foreach (var pair in numberPairs)
+        {
+            var comparison = PatternMatchingExamples.CompareNumbers(pair.Item1, pair.Item2);
+            Console.WriteLine($"Comparing {pair.Item1} and {pair.Item2}: {comparison}");
         }
     }
 }
