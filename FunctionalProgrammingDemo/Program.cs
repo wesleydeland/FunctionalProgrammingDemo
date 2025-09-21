@@ -194,6 +194,6 @@ internal static class PureFunctionExamples
 
 internal record Result(bool Success, string Message)
 {
-    internal static Result Successful(string message) => new Result(true, message);
-    internal static Result Failed(string message) => new Result(false, message);
+    internal static Result Successful(string message) => new(true, message);
+    internal static Result Failed(string message) => new(false, message);
 }
