@@ -1,6 +1,7 @@
-﻿// Functional Programming Demo in .NET
-using System.Collections.Frozen;
+﻿using System.Collections.Frozen;
 using System.Collections.Immutable;
+
+namespace FunctionalProgrammingDemo;
 
 public record Person(string Name, int Age);
 
@@ -43,10 +44,10 @@ public static class PatternMatchingExamples
 
 public static class FunctionalExamples
 {
-    // 1. Pure Function Example
+    // Pure Function Example
     public static int Add(int x, int y) => x + y;
 
-    // 4. Function Composition Example
+    // Function Composition Example
     public static int DoubleIt(int x) => x * 2;
     public static int SquareIt(int x) => x * x;
     public static int DoubleThenSquare(int x) => SquareIt(DoubleIt(x));
@@ -56,15 +57,15 @@ public class Program
 {
     public static void Main()
     {
-        // 3. Higher-Order Function Example
+        // Higher-Order Function Example
         Func<int, int, int> operation = FunctionalExamples.Add;
 
-        // 4. Function Composition Example
+        // Function Composition Example
         Func<int, int> doubleIt = FunctionalExamples.DoubleIt;
         Func<int, int> squareIt = FunctionalExamples.SquareIt;
         Func<int, int> doubleThenSquare = FunctionalExamples.DoubleThenSquare;
 
-        // 5. Declarative Style Example (LINQ)
+        // Declarative Style Example (LINQ)
         IEnumerable<int> numbers = Enumerable.Range(1, 5);
         var evenSquares = numbers.Where(n => n % 2 == 0).Select(squareIt);
 
@@ -85,7 +86,7 @@ public class Program
         Console.WriteLine("Declarative Style (LINQ): even squares = [" + string.Join(", ", evenSquares) + "]");
 
         // Immutable Examples
-        Console.WriteLine("Immutable Calculation: CalculateEquation(2, 3) = " + ImmutableExamples.CalculateEquation(2, 3));
+        Console.WriteLine("Immutable Calculation: CalculateEquation(2, 3) = " + ImmutableExamples.CalculateSquare(2, 3));
 
         Console.WriteLine("Linq Immutability Example:");
         ImmutableExamples.LinqImmutability();
@@ -95,7 +96,7 @@ public class Program
 
         Console.WriteLine("Pure Function Example: Factorial(5) = " + PureFunctionExamples.Factorial(5));
 
-        var iterations = Enumerable.Range(1, 100);
+        var iterations = Enumerable.Range(1, 10);
 
         iterations.Select(_ => PureFunctionExamples.CallExternalService())
             .ToList();
@@ -147,7 +148,7 @@ public class Program
 
 internal static class ImmutableExamples
 {
-    internal static int CalculateEquation(int a, int b)
+    internal static int CalculateSquare(int a, int b)
     {
         // Immutable variables
         int sum = a + b;
@@ -158,8 +159,8 @@ internal static class ImmutableExamples
 
     internal static IEnumerable<int> LinqImmutability()
     {
-        ImmutableArray<int> numbers = [1, 2, 3, 4, 5];
-        var doubled = numbers.Select(n => n * 2).ToFrozenSet(); // Creates a new list
+        ImmutableArray<int> numbers = [.. Enumerable.Range(1, 5)];
+        var doubled = numbers.Select(n => n * 2).ToFrozenSet();
         Console.WriteLine("Original: " + string.Join(", ", numbers));
         Console.WriteLine("Doubled: " + string.Join(", ", doubled));
 
@@ -172,12 +173,19 @@ internal static class PureFunctionExamples
     internal static int Multiply(int x, int y) => x * y;
     internal static int Factorial(int n) => n <= 1 ? 1 : n * Factorial(n - 1);
 
+    /// <summary>
+    /// Simulates calling an external service that may fail randomly.
+    /// </summary>
+    /// <returns>Result of the operation</returns>
     internal static Result CallExternalService()
     {
         try
         {
             var rand = new Random();
             int randomNumber = rand.Next(1, 1001);
+
+            //this is non-functional, but that is OKAY
+            // C# is a hybrid language and not everything needs to be functional
             if (randomNumber % 2 != 0)
                 throw new Exception("Random number is odd, operation failed");
 
