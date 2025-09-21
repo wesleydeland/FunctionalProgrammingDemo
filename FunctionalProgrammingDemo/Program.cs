@@ -1,4 +1,5 @@
 ﻿// Functional Programming Demo in .NET
+using System.Collections.Frozen;
 using System.Collections.Immutable;
 
 public record Person(string Name, int Age);
@@ -95,28 +96,27 @@ public class Program
         Console.WriteLine("Pure Function Example: Factorial(5) = " + PureFunctionExamples.Factorial(5));
 
         var iterations = Enumerable.Range(1, 100);
-        foreach (var item in iterations)
-        {
-            var result = PureFunctionExamples.CallExternalService();
-            Console.WriteLine($"CallExternalService Result: Success = {result.Success}, Message = '{result.Message}'");
-        }
+
+        iterations.Select(_ => PureFunctionExamples.CallExternalService())
+            .ToList();
 
         // Pattern Matching Examples
         Console.WriteLine("\nPattern Matching Examples:");
-        
+
         // Shape pattern matching
-        Shape[] shapes = 
+        Shape[] shapes =
         {
             new Circle(5),
             new Rectangle(4, 6),
             new Triangle(3, 4)
         };
 
-        foreach (var shape in shapes)
+        shapes.Select(s =>
         {
-            var area = PatternMatchingExamples.CalculateArea(shape);
-            Console.WriteLine($"Area of {shape.GetType().Name}: {area:F2}");
-        }
+            var area = PatternMatchingExamples.CalculateArea(s);
+            Console.WriteLine($"Area of {s.GetType().Name}: {area:F2}");
+            return area;
+        }).ToList();
 
         // Person classification pattern matching
         var people = new[]
@@ -127,19 +127,21 @@ public class Program
             new Person("Martha", 70)
         };
 
-        foreach (var person in people)
+        people.Select(person =>
         {
             var classification = PatternMatchingExamples.ClassifyPerson(person);
             Console.WriteLine($"{person.Name} is a {classification}");
-        }
+            return classification;
+        }).ToList();
 
         // Number comparison pattern matching
         var numberPairs = new[] { (0, 0), (5, 3), (2, 7), (4, 4) };
-        foreach (var pair in numberPairs)
+        numberPairs.Select(pair =>
         {
             var comparison = PatternMatchingExamples.CompareNumbers(pair.Item1, pair.Item2);
             Console.WriteLine($"Comparing {pair.Item1} and {pair.Item2}: {comparison}");
-        }
+            return comparison;
+        }).ToList();
     }
 }
 
@@ -154,12 +156,14 @@ internal static class ImmutableExamples
         return squared;
     }
 
-    internal static void LinqImmutability()
+    internal static IEnumerable<int> LinqImmutability()
     {
         ImmutableArray<int> numbers = [1, 2, 3, 4, 5];
-        var doubled = numbers.Select(n => n * 2).ToList(); // Creates a new list
+        var doubled = numbers.Select(n => n * 2).ToFrozenSet(); // Creates a new list
         Console.WriteLine("Original: " + string.Join(", ", numbers));
         Console.WriteLine("Doubled: " + string.Join(", ", doubled));
+
+        return doubled;
     }
 }
 
@@ -170,7 +174,6 @@ internal static class PureFunctionExamples
 
     internal static Result CallExternalService()
     {
-        var result = new Result();
         try
         {
             var rand = new Random();
@@ -178,26 +181,19 @@ internal static class PureFunctionExamples
             if (randomNumber % 2 != 0)
                 throw new Exception("Random number is odd, operation failed");
 
-            result.SetSuccess("Operation completed successfully");
+            Console.WriteLine("Random number is even, operation succeeded");
+            return Result.Successful("Operation completed successfully");
         }
         catch (Exception ex)
         {
             Console.WriteLine("Error: {0}", ex.Message);
-            result.SetSuccess("Operation failed", false);
+            return Result.Failed("Operation failed");
         }
-
-        return result;
     }
 }
 
-internal class Result
+internal record Result(bool Success, string Message)
 {
-    public bool Success { get; set; } = false;
-    public string Message { get; set; } = string.Empty;
-
-    public void SetSuccess(string message, bool isSuccess = true)
-    {
-        Success = isSuccess;
-        Message = message;
-    }
+    internal static Result Successful(string message) => new Result(true, message);
+    internal static Result Failed(string message) => new Result(false, message);
 }
