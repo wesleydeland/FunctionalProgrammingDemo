@@ -175,6 +175,8 @@ internal static class PureFunctionExamples
 
     /// <summary>
     /// Simulates calling an external service that may fail randomly.
+    /// This function is not pure because it relies on randomness and has side effects (console output).
+    /// It is included here to demonstrate handling failures in a functional style.
     /// </summary>
     /// <returns>Result of the operation</returns>
     internal static Result CallExternalService()
