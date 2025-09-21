@@ -86,7 +86,7 @@ public class Program
         Console.WriteLine("Declarative Style (LINQ): even squares = [" + string.Join(", ", evenSquares) + "]");
 
         // Immutable Examples
-        Console.WriteLine("Immutable Calculation: CalculateEquation(2, 3) = " + ImmutableExamples.CalculateSquare(2, 3));
+        Console.WriteLine("Immutable Calculation: CalculateNonsense(2, 3) = " + ImmutableExamples.CalculateNonsense(2, 3));
 
         Console.WriteLine("Linq Immutability Example:");
         ImmutableExamples.LinqImmutability();
@@ -148,12 +148,13 @@ public class Program
 
 internal static class ImmutableExamples
 {
-    internal static int CalculateSquare(int a, int b)
+    internal static int CalculateNonsense(int a, int b)
     {
         // Immutable variables
         int sum = a + b;
         int product = a * b;
-        int squared = product * product;
+        int sumAndProduct = sum + product;
+        int squared = sumAndProduct * sumAndProduct;
         return squared;
     }
 
