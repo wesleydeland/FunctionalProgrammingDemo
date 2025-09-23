@@ -31,6 +31,6 @@ jobs:
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         comment-title: 'Unit Test Results'
-        results-path: $GITHUB_WORKSPACE/FunctionalProgrammingDemo/FunctionalProgrammingDemo.Tests/TestResults/*.trx
-        coverage-path: $GITHUB_WORKSPACE/FunctionalProgrammingDemo/FunctionalProgrammingDemo.Tests/TestResults/coverage.xml
+        results-path: ${{ github.workspace }}/FunctionalProgrammingDemo/FunctionalProgrammingDemo.Tests/TestResults/*.trx
+        coverage-path: ${{ github.workspace }}/FunctionalProgrammingDemo/FunctionalProgrammingDemo.Tests/TestResults/coverage.xml
         coverage-threshold: 80
