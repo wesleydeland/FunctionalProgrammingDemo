@@ -25,7 +25,7 @@ jobs:
     - name: Build
       run: dotnet build --no-restore
     - name: Test
-      run: dotnet test --no-build --verbosity normal --logger trx
+      run: dotnet test --no-build --verbosity normal --logger trx --collect:"XPlat Code Coverage"
     - name: Dotnet Test Reporter
       uses: bibipkins/dotnet-test-reporter@v1.5.4
       with:
