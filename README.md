@@ -1,4 +1,5 @@
 ﻿# Functional Programming Demo in .NET
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/wesleydeland/FunctionalProgrammingDemo/dotnet.yml)
 
 This project demonstrates various functional programming patterns and features in C#/.NET. It serves as a practical example of how to implement functional programming concepts in a traditionally object-oriented language.
 
