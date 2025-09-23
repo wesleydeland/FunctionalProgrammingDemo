@@ -25,12 +25,12 @@ jobs:
     - name: Build
       run: dotnet build --no-restore
     - name: Test
-      run: dotnet test --no-build --verbosity normal --logger trx --collect:"XPlat Code Coverage"
+      run: dotnet test --no-build --verbosity normal --logger trx --collect:"XPlat Code Coverage" --results-directory coverage
     - name: Dotnet Test Reporter
       uses: bibipkins/dotnet-test-reporter@v1.5.4
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         comment-title: 'Unit Test Results'
-        results-path: ${{ github.workspace }}/FunctionalProgrammingDemo.Tests/TestResults/*.trx
-        coverage-path: ${{ github.workspace }}/FunctionalProgrammingDemo.Tests/TestResults/**/coverage.cobertura.xml
+        results-path: ${{ github.workspace }}/FunctionalProgrammingDemo.Tests/coverage/*.trx
+        coverage-path: ${{ github.workspace }}/FunctionalProgrammingDemo.Tests/coverage/**/coverage.cobertura.xml
         coverage-threshold: 80
