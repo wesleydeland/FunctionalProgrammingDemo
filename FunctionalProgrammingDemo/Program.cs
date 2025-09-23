@@ -146,9 +146,9 @@ public class Program
     }
 }
 
-internal static class ImmutableExamples
+public static class ImmutableExamples
 {
-    internal static int CalculateNonsense(int a, int b)
+    public static int CalculateNonsense(int a, int b)
     {
         // Immutable variables
         int sum = a + b;
@@ -158,7 +158,7 @@ internal static class ImmutableExamples
         return squared;
     }
 
-    internal static IEnumerable<int> LinqImmutability()
+    public static IEnumerable<int> LinqImmutability()
     {
         ImmutableArray<int> numbers = [.. Enumerable.Range(1, 5)];
         var doubled = numbers.Select(n => n * 2).ToFrozenSet();
@@ -169,10 +169,10 @@ internal static class ImmutableExamples
     }
 }
 
-internal static class PureFunctionExamples
+public static class PureFunctionExamples
 {
-    internal static int Multiply(int x, int y) => x * y;
-    internal static int Factorial(int n) => n <= 1 ? 1 : n * Factorial(n - 1);
+    public static int Multiply(int x, int y) => x * y;
+    public static int Factorial(int n) => n <= 1 ? 1 : n * Factorial(n - 1);
 
     /// <summary>
     /// Simulates calling an external service that may fail randomly.
@@ -180,7 +180,7 @@ internal static class PureFunctionExamples
     /// It is included here to demonstrate handling failures in a functional style.
     /// </summary>
     /// <returns>Result of the operation</returns>
-    internal static Result CallExternalService()
+    public static Result CallExternalService()
     {
         try
         {
@@ -203,8 +203,8 @@ internal static class PureFunctionExamples
     }
 }
 
-internal record Result(bool Success, string Message)
+public record Result(bool Success, string Message)
 {
-    internal static Result Successful(string message) => new(true, message);
-    internal static Result Failed(string message) => new(false, message);
+    public static Result Successful(string message) => new(true, message);
+    public static Result Failed(string message) => new(false, message);
 }
