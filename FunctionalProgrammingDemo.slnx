@@ -1,4 +1,4 @@
 <Solution>
-  <Project Path="FunctionalProgrammingDemo.Tests/FunctionalProgrammingDemo.Tests.csproj" />
+  <Project Path="FunctionalProgrammingDemo.TestsV3/FunctionalProgrammingDemo.Tests.csproj" />
   <Project Path="FunctionalProgrammingDemo/FunctionalProgrammingDemo.csproj" />
 </Solution>

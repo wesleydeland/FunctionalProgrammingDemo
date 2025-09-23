@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Frozen;
-using System.Collections.Immutable;
-using Xunit;
-
-namespace FunctionalProgrammingDemo.Tests;
+namespace FunctionalProgrammingDemo.TestsV3;
 
 public class PatternMatchingTests
 {
