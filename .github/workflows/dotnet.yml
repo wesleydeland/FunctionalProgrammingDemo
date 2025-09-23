@@ -28,7 +28,7 @@ jobs:
       run: dotnet test -- --coverage --coverage-output-format cobertura --coverage-output coverage/coverage.cobertura.xml
     - name: Check coverage file exists and is not empty
       run: |
-        if [ ! -s coverage/**/coverage.cobertura.xml ]; then
+        if [ ! -s coverage/coverage.cobertura.xml ]; then
           echo "Coverage file missing or empty"
           exit 1
         fi
