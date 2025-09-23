@@ -26,6 +26,12 @@ jobs:
       run: dotnet build --no-restore
     - name: Test
       run: dotnet test --no-build --verbosity normal --logger trx --collect:"XPlat Code Coverage" --results-directory coverage
+    - name: Check coverage file exists and is not empty
+      run: |
+        if [ ! -s coverage/**/coverage.cobertura.xml ]; then
+          echo "Coverage file missing or empty"
+          exit 1
+        fi
     - name: Dotnet Test Reporter
       uses: bibipkins/dotnet-test-reporter@v1.5.4
       with:
